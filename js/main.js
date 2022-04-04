@@ -14,7 +14,7 @@ const inputRace = document.querySelector('.js-input-race');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMesageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
-
+const input_search_race = document.querySelector('.js_in_search_race');
 
 //Objetos con cada gatito
 const kittenData_1 = {
@@ -126,6 +126,9 @@ function filterKitten(event) {
     event.preventDefault();
     const descrSearchText = input_search_desc.value;
     listElement.innerHTML = "";
+
+    // const kittenListFiltered = kittenDataList.filter((cat) => cat.kittenItem.desc === descrSearchText);
+
     for (const kittenItem of kittenDataList) {
         if (kittenItem.desc.includes(descrSearchText)) {
             listElement.innerHTML += renderKitten(kittenItem);
@@ -133,7 +136,7 @@ function filterKitten(event) {
     }
 }
 
-//Mostrar el litado de gatitos en el HTML
+//Mostrar el listado de gatitos en el HTML
 renderKittenList(kittenDataList);
 
 //Eventos
@@ -147,8 +150,15 @@ buttonCancelForm.addEventListener("click", cancelNewKitten);
 
 
 
-// Filtrar litado de gatitos (lección 10.2 - Filter)
+// Filtrar listado de gatitos (lección 10.2 - Filter)
 function filterKitten(ev) {
+
+    // const descrSearchText = input_search_desc.value;
+    // const raceSearchText = input_search_race.value;
+    // listElement.innerHTML = "";
+
+    // const kittenListFiltered = kittenDataList.filter((cat) => cat.descrSearchText === );
+
     //Modifica el código:
     //Haz un filter sobre el listado de gatitos
     //Vuelve a pintar el listado de gatitos filtrados en el HTML.
