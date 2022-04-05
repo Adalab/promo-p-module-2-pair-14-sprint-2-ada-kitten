@@ -36,7 +36,7 @@ const kittenData_3 = {
     race: "British Shorthair",
 };
 
-const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+let kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
 
 //Funciones
 function renderKitten(kittenData) {
@@ -95,7 +95,7 @@ function addNewKitten(event) {
         race: valueRace,
     };
 
-    const kittenDataList = [];
+    let kittenDataList = [];
     
     if (valueDesc === "" && valuePhoto === "" && valueName === "") {
         labelMesageError.innerHTML = "Debe rellenar todos los valores";
@@ -148,8 +148,6 @@ buttonCancelForm.addEventListener("click", cancelNewKitten);
 
 // Agregar un nuevo gatito al listado (lección 9 - métodos arrays)
 
-
-
 // Filtrar listado de gatitos (lección 10.2 - Filter)
 function filterKitten(ev) {
 
@@ -162,7 +160,20 @@ function filterKitten(ev) {
     //Modifica el código:
     //Haz un filter sobre el listado de gatitos
     //Vuelve a pintar el listado de gatitos filtrados en el HTML.
-  }
+}
 
+// Obtener listado de gatitos desde el servidor
+const GITHUB_USER = 'AnaliaRio';
+const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
 
+fetch(SERVER_URL, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+})
+    .then((response) => response.json())
+    .then((data) => {
+        kittenDataList = data.results;
+        // renderKittenList(kittenDataList);
+    });
 
+    console.log(kittenDataList);
