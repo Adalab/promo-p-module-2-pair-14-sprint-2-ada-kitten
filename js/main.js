@@ -17,26 +17,8 @@ const input_search_desc = document.querySelector('.js_in_search_desc');
 const input_search_race = document.querySelector('.js_in_search_race');
 
 //Objetos con cada gatito
-const kittenData_1 = {
-    image: "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
-    name: "Anastacio",
-    desc: "Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
-    race: "British Shorthair",
-};
-const kittenData_2 = {
-    image: "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg",
-    name: "Fiona",
-    desc: "Juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
-    race: "British Shorthair",
-};
-const kittenData_3 = {
-    image: "https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg",
-    name: "Cielo",
-    desc: "Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
-    race: "British Shorthair",
-};
 
-let kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+let kittenDataList = [];
 
 //Funciones
 function renderKitten(kittenData) {
@@ -44,7 +26,7 @@ function renderKitten(kittenData) {
     <article>
       <img
         class="card_img"
-        src=${kittenData.image}
+        src=${kittenData.url}
         alt="gatito"
       />
       <h3 class="card_title">${kittenData.name}</h3>
@@ -163,8 +145,14 @@ function filterKitten(ev) {
 }
 
 // Obtener listado de gatitos desde el servidor
+// Guardar en local storage
 const GITHUB_USER = 'AnaliaRio';
 const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
+const kittenListStored = JSON.parse(localStorage.getItem('kittensList'));
+
+if (kittenListStored) {
+    renderKittenList(kittenDataList);
+} else {
 
 fetch(SERVER_URL, {
     method: 'GET',
@@ -173,7 +161,8 @@ fetch(SERVER_URL, {
     .then((response) => response.json())
     .then((data) => {
         kittenDataList = data.results;
-        // renderKittenList(kittenDataList);
+        renderKittenList(kittenDataList);
     });
 
     console.log(kittenDataList);
+}
