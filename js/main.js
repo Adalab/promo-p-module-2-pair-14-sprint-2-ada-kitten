@@ -148,11 +148,14 @@ function filterKitten(ev) {
 // Guardar en local storage
 const GITHUB_USER = 'AnaliaRio';
 const SERVER_URL = `https://adalab-api.herokuapp.com/api/kittens/${GITHUB_USER}`;
+
 const kittenListStored = JSON.parse(localStorage.getItem('kittensList'));
 
 if (kittenListStored) {
+    kittenDataList = kittenListStored;
     renderKittenList(kittenDataList);
-} else {
+}
+else {
 
 fetch(SERVER_URL, {
     method: 'GET',
@@ -162,6 +165,9 @@ fetch(SERVER_URL, {
     .then((data) => {
         kittenDataList = data.results;
         renderKittenList(kittenDataList);
+    });
+    .catch(error => {
+        console.error(error);
     });
 
     console.log(kittenDataList);
